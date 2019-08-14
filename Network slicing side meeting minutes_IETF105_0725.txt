@@ -1,0 +1,107 @@
+Network slicing side meeting on IETF 105
+
+Date & time: 2019.7.25 13:45-15:00 
+Meeting room: Coller
+
+0) Meeting introduction and agenda bashing (5) 
+The purpose is to introduce 3GPP¡¯s progress in network slicing and their 
+requirement on transport network, let operators share their network slicing use cases, and then discuss SR based network slicing, focusing on the data plane as the first step.
+
+1) Overview of 3GPP network slicing progress and requirements on transport (10) 
+Gamini Senarath presenting. 
+Introduce network slice representation in UE, RAN and CN: NSSAI and NSI. Transport network should be able to support the network slice related topology and QoS requirements. TN slice is expected to provide guaranteed performance, resource may be shared or isolated.
+
+2) Network slicing use cases and requirement (10)
+Fengwei Qin presenting. 
+Two major use cases: smart grid and HD live video. Several other use cases are also under study. Both soft and hard isolation are needed for transport network slicing.
+
+3) Overview of Enhanced VPN Framework (5)
+Adrian presenting. 
+Introduce the overall architecture of VPN+ and candidate technologies. Highlight that enhanced data plane is important for peformance assurance.
+
+4) Isolation requirement of network slicing (5)
+Xuesong Geng presenting. 
+Analyze the technologies for soft and hard isolation and the pros vs cons.
+
+5) Segment routing for network slicing (10)
+Jie Dong presenting. Focus on the enhancement to SR data plane for network 
+slicing.
+
+Open discussion:
+
+Adrian: Suggest to first have clarification questions, then dive into the SR based slicing discussion.
+
+Jim: Any indication on how many slices would be needed? Have heard from 10 to several million. It is important because the technology might be different for different scales. And do we expect the slices to be aggregated, more on the edge, then aggregated in the core, as bigger pipes are used in the core.
+
+Himanshu: Also how transient are the slices? How frequently they come and go?
+Stewart: Sometimes people are talking about network slices for different apps.
+
+Fengwei Qin: In CMCC there will be 3 hard slices in the beginning for different service types, in each hard slice there can be multiple soft slices for different services/tenants. We need hard slices. How many slices depends on the service requirement and the available resource.
+
+Gamini: In SA2, in NSSAI, 1 byte is used for slice types, currently a few standard service/slice types (SST), each type can have multiple slice instances each identified by Slice Differentiator (SD). This allows hundreds to thousands of slices.
+
+Adrian: Is the slice model in 3GPP also pushing to the transport, or it is above the transport?
+
+Gamini: At least the slice types, each has different characteristics.
+
+Stewart: Would I have multiple slices of the same slice type, e.g. 1, 10 or 1000 low latency slices?
+
+Adrian: So how many instances of any slice type do you want vendors to support?
+
+Ignas: (As an operator), in the near future probably need 4 slices. Two for internal management isolation, two for different payload (service). This can be solved on optical layer and not need much intelligence, just point-to-point transport. A general answer is need 2 slices, one for payload (service), another for internal management.
+
+Adrian: So you don't provide slices to customer? 
+
+Ignas: There is no demand for that so far. If there is a demand, it needs to be done on a customer by customer, case by case basis. Need to consider the cost vs. the revenue.
+
+Luis: No clue about the number of slices. Think there are points of having network slices per customer/tenant, depends on the capability offered to the customer for managing their own network slices, like configuring the paths and monitoring the slice. Depends on the capability, currently expect very few number of slices in the beginning.
+
+Jim: Technically can do traffic engineering on MPLS VPNs, but nobody wants to. It is not just because RSVP-TE is complicated, it is also because there was no demand from customer.
+
+Stewart: There may be some special cases for per-customer slices.
+
+?: How you tell the difference between VPN and slice? A power company asks for a slice, if you give him a VPN and say you will guarantee the service, they will not buy it. 
+
+Stewart: They have much strict requirement in isolation and¡­
+
+Adrian: Back to the invention of VPN, the customer wants the privacy part of VPN, they also want private resources, while the V means virtual. In most cases their traffic didn¡¯t spill, and they didn¡¯t interfere. Would customer care if they get the expected behavior of a slice, with a virtual slice?
+
+?: Need to answer what is the difference between slice and VPN?
+
+Himanshu: Does the slice only at the data plane level? Is it also in the control plane level? e.g. dedicated IS-IS IGP instance to provide control plane isolation of bugs.
+
+Jim: From customer's perspective, what they really care is whether the SLA  can be guaranteed. Soft or hard isolation is implementation specific.
+
+?: IMO the difference between slice and VPN is that slice is end-to-end aspect. VPN does not have this E2E concept.
+
+Himanshu: In old days, there used to be the discussion about VRF vs. Router instances. Router instance has been proved to be complex and high cost, and VRF was chosen.
+
+Stewart: In some discussions slicing also include compute and storage.
+
+Ignas: Regarding difference between slice and VPN, think there is no much difference. VPN is a component of the E2E slice. What is important the requirement of the interconnection service. More on the requirement: whether need to add complexity to solve the problem which can be solved by parallelization.
+
+Bruno: Have no answer about the number of network slices. 5G has a lot of marketing promises. There are multiple radio systems, for police, security, residential, etc. 5G claims that we can run everything on 5G, while some customer (e.g. police) wants to have their services independent from any failure, disaster or whatever happens in other slices. Would it be cheaper to merge a few slices with a lot of capacity? Or for the SLA promises, it would be cheaper to do fine granularity resource isolation?
+
+Stewart: Different countries have different approaches to operate their mobile 
+networks.
+
+Bruno: In terms of network coverage, it is cheaper to have a single network. The cell sites can be shared.
+
+Satoru: Network Slice consists of 5G core and transport. The transport slice maybe VPN, VPN+, SR etc. The key is what is the glue to bind the 3GPP CORE and RAN slice to TN slice for the end-to-end slices. We may define an architecture on slicing and send liaison to 3GPP.
+
+Robin: Have reached some consensus on network slicing, CN slice has dedicated 
+resource. For TN we need to meet the isolation requirement. With VPN we used to use different QoS mechanism or overprovisioning, either not scalable or do not meet the SLA requirement. Thus we need to allocate dedicated resource in a scalable way to meet the requirements. As for the number of network slice, some people think maybe 10 network slices for different service types in the beginning.
+
+Gamini: (Response to control plane slicing) In 3GPP, the control plane is separated from data plane, may be shared between different slices. (Responce to the aggregation) Single NSSAI can be mapped to multiple Core network slice IDs, aggregation at different levels can be different.
+
+Satoru: The mapping between core network slice and transport slice may be not 1:1.
+
+Robin: Agree, CN use virtualization of network resources in servers, while TN needs to rely on the capability and resource of hardware. The granularity may be different.
+
+Adrian: (Wrap up). A little disappointed that didn't get into the discussion of SR for network slicing, instead we had further discussion about what we need to address. It shows there is quite a lot of interest in solving network slicing, while still needs to know more about what it is resolving, thus need to have more discussion. Will post the slides and notes after the meeting. Encourage to continue the discussion after the meeting.
+
+Ignas: IETF may not have the best audience for discussion of the requirements, not an operators' forum. On the other hand, 3GPP will use the technology they think fits their requirement. Suggest to have more discussion in operators' forum about the requirement. Try to gather what is missing with existing technology components, and provide a guidance. Then IETF can work on the solution. May get a mailing list if needed.
+
+Adrian: To summarize, self-organize, people have interest can start doing stuff, and Ignas will facilitate.
+
+Meeting ajourn.
