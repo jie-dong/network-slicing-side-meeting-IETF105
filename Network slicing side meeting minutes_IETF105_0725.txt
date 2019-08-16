@@ -4,7 +4,7 @@ Date & time: 2019.7.25 13:45-15:00
 Meeting room: Coller
 
 0) Meeting introduction and agenda bashing (5) 
-The purpose is to introduce 3GPP¡¯s progress in network slicing and their 
+The purpose is to introduce 3GPPÂ¡Â¯s progress in network slicing and their 
 requirement on transport network, let operators share their network slicing use cases, and then discuss SR based network slicing, focusing on the data plane as the first step.
 
 1) Overview of 3GPP network slicing progress and requirements on transport (10) 
@@ -60,19 +60,19 @@ Jim: Technically can do traffic engineering on MPLS VPNs, but nobody wants to. I
 
 Stewart: There may be some special cases for per-customer slices.
 
-?: How you tell the difference between VPN and slice? A power company asks for a slice, if you give him a VPN and say you will guarantee the service, they will not buy it. 
+David Krauss: How you tell the difference between VPN and slice? A power company asks for a slice, if you give him a VPN and say you will guarantee the service, they will not buy it. 
 
-Stewart: They have much strict requirement in isolation and¡­
+Stewart: They have much strict requirement in isolation andÂ¡Â­
 
-Adrian: Back to the invention of VPN, the customer wants the privacy part of VPN, they also want private resources, while the V means virtual. In most cases their traffic didn¡¯t spill, and they didn¡¯t interfere. Would customer care if they get the expected behavior of a slice, with a virtual slice?
+Adrian: Back to the invention of VPN, the customer wants the privacy part of VPN, they also want private resources, while the V means virtual. In most cases their traffic didnÂ¡Â¯t spill, and they didnÂ¡Â¯t interfere. Would customer care if they get the expected behavior of a slice, with a virtual slice?
 
-?: Need to answer what is the difference between slice and VPN?
+David Krauss: Need to answer what is the difference between slice and VPN?
 
 Himanshu: Does the slice only at the data plane level? Is it also in the control plane level? e.g. dedicated IS-IS IGP instance to provide control plane isolation of bugs.
 
 Jim: From customer's perspective, what they really care is whether the SLA  can be guaranteed. Soft or hard isolation is implementation specific.
 
-?: IMO the difference between slice and VPN is that slice is end-to-end aspect. VPN does not have this E2E concept.
+David Krauss: IMO the difference between slice and VPN is that slice is end-to-end aspect. VPN does not have this E2E concept.
 
 Himanshu: In old days, there used to be the discussion about VRF vs. Router instances. Router instance has been proved to be complex and high cost, and VRF was chosen.
 
